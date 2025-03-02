@@ -73,7 +73,7 @@ class Train:
     def __init__(self, epochs: int, validation_split: float, batch_size: int):
         # int / кол-во повторений обучения
         self.epochs = epochs
-        # float / размер шага (при градиентном спуске)
+        # float / доля на валидацию
         self.validation_split = validation_split
-        # int / кол-во повторений между оптимизацией
+        # int / размер партии на которую делится обучающая выборка
         self.batch_size = batch_size

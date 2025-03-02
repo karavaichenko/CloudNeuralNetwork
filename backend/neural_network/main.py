@@ -22,6 +22,7 @@ request = Request(dataset=dataset, model=model, structure=structure, train=train
 
 class NeuralNetwork(Request):
     def create_model(self):
+        self.prepare_dataset()
         model = keras.models.Sequential()
         model.add(Flatten(input_shape=(self.dataset.input_data_scale, )))
         count: int = self.structure.hidden_layer_count
@@ -44,11 +45,13 @@ class NeuralNetwork(Request):
                   validation_split=self.train.validation_split)
         return model
 
+    def save_model(self, model, path: str):
+        model.save(filepath=path)
 
 
 neuralnetwork = NeuralNetwork(model=request.model, structure=request.structure,
                               train=request.train, dataset=request.dataset)
 
-neuralnetwork.prepare_dataset()
 model = neuralnetwork.create_model()
 model = neuralnetwork.train_model(model)
+neuralnetwork.save_model(model, "../12122312312.keras")
